@@ -166,12 +166,12 @@ p, .decision-subtitle {
 }
 .chart-subtitle {
     font-weight: 400;
-    color: #64748B;
+    color: #94A3B8;
     font-size: 0.85rem;
 }
 .chart-hint {
-    font-size: 0.78rem;
-    color: #64748B;
+    font-size: 0.82rem;
+    color: #94A3B8;
     margin-top: -0.4rem;
     margin-bottom: 0.6rem;
 }

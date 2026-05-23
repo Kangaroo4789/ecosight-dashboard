@@ -128,9 +128,9 @@ def make_scatter(df: pd.DataFrame, group_col: str) -> go.Figure:
         legend=dict(title="", orientation="h", yanchor="bottom", y=-0.28,
                     xanchor="left", x=0, font=dict(size=11, color="#F8FAFC")),
         xaxis=dict(gridcolor="#334155", zeroline=False,
-                   title_font=dict(color="#94A3B8"), tickfont=dict(color="#94A3B8")),
+                   title_font=dict(color="#E2E8F0"), tickfont=dict(color="#CBD5E1")),
         yaxis=dict(gridcolor="#334155", zeroline=False,
-                   title_font=dict(color="#94A3B8"), tickfont=dict(color="#94A3B8")),
+                   title_font=dict(color="#E2E8F0"), tickfont=dict(color="#CBD5E1")),
     )
     return fig
 
@@ -217,16 +217,19 @@ def make_dumbbell(df: pd.DataFrame) -> go.Figure:
     ))
 
     fig.update_layout(
-        height=380,
-        margin=dict(l=10, r=30, t=10, b=40),
+        height=420,
+        margin=dict(l=10, r=30, t=10, b=80),
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         xaxis=dict(range=[0.8, 5.5], title="構面平均分（1–5 量表）",
                    gridcolor="#334155", zeroline=False,
-                   title_font=dict(color="#94A3B8"), tickfont=dict(color="#94A3B8")),
+                   title_font=dict(color="#E2E8F0", size=13),
+                   tickfont=dict(color="#E2E8F0", size=12)),
         yaxis=dict(autorange="reversed", gridcolor="#334155", zeroline=False,
-                   tickfont=dict(color="#CBD5E1", size=12)),
-        legend=dict(orientation="h", yanchor="bottom", y=-0.18,
-                    xanchor="center", x=0.5, font=dict(color="#F8FAFC", size=13)),
+                   tickfont=dict(color="#F1F5F9", size=13)),
+        legend=dict(orientation="h", yanchor="bottom", y=-0.22,
+                    xanchor="center", x=0.5,
+                    font=dict(color="#F8FAFC", size=14),
+                    bgcolor="rgba(0,0,0,0)"),
     )
     return fig
 
@@ -371,7 +374,9 @@ if has_all_dims and not df.empty:
 st.markdown("""
 <div style="margin-bottom:1.5rem;">
     <div class="ecosight-title">🌿 EcoSight <span class="ecosight-accent">永續行銷決策智庫</span></div>
-    <div class="ecosight-subtitle">TPB 理論框架 · 內建 PCA 降維 · 知行落差視覺化分析</div>
+    <div class="ecosight-subtitle" style="color:#94A3B8;font-size:0.95rem;">
+        TPB 理論框架 · 內建 PCA 降維 · 知行落差視覺化分析
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -469,12 +474,19 @@ else:
     st.markdown("<br/>", unsafe_allow_html=True)
 
     # ── Row 3：精準行銷名單匯出 ───────────────────────────
-    st.markdown("""
+    st.markdown(f"""
     <div class="decision-section">
-        <div class="decision-title">📋 高流失風險客群名單（精準行銷投放）</div>
-        <div class="decision-subtitle">
-            系統已自動篩選出「<b>高意圖卻低行為</b>」的知行落差族群，
-            適合作為再行銷、教育型內容的優先觸達對象。
+        <div class="decision-title">📋 知行落差客群名單</div>
+        <div style="margin-top:0.6rem;margin-bottom:0.8rem;">
+            <div style="color:#F1F5F9;font-size:0.95rem;line-height:1.8;">
+                這份名單列出「<span style="color:#FBBF24;font-weight:700;">說想買，但實際上沒買</span>」的受訪者，
+                即論文核心的 <span style="color:#10B981;font-weight:700;">知行落差（Intention–Behavior Gap）</span> 族群。
+            </div>
+            <div style="color:#94A3B8;font-size:0.85rem;margin-top:0.4rem;">
+                📌 篩選條件：意圖分數（INT）≥ 中位數 且 行為分數（BH）&lt; 中位數<br>
+                💡 應用場景：這群人只差一個「推力」，適合投放綠色消費教育內容、提供優惠誘因或社群規範提醒。<br>
+                📥 目前共識別出 <span style="color:#FBBF24;font-weight:700;">{len(gap_group)} 位</span>，佔高意圖族群的 <span style="color:#FBBF24;font-weight:700;">{gap_rate:.1f}%</span>。
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
